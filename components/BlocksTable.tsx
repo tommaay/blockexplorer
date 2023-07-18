@@ -1,6 +1,7 @@
 "use client";
 
 import { FC, useEffect, useState } from "react";
+import Link from "next/link";
 import {
   Table,
   TableBody,
@@ -8,8 +9,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { alchemy, utils } from "@/lib/alchemy";
+} from "@/components/ui/Table";
+import { alchemy } from "@/lib/alchemy";
 
 interface BlocksTableProps {
   blocks: number[];
@@ -32,8 +33,6 @@ const BlocksTable: FC<BlocksTableProps> = ({ blocks }) => {
     getBlockData();
   }, [blocks]);
 
-  console.log({ blockData });
-
   return (
     <Table>
       <TableHeader>
@@ -46,9 +45,17 @@ const BlocksTable: FC<BlocksTableProps> = ({ blocks }) => {
       <TableBody>
         {blockData.map((block) => (
           <TableRow key={block.hash}>
-            <TableCell className="font-medium">{block.number}</TableCell>
-            <TableCell>{block.miner}</TableCell>
-            <TableCell>{block.transactions.length}</TableCell>
+            <TableCell className="font-medium">
+              <Link href={`/block/${block.number}`}>{block.number}</Link>
+            </TableCell>
+            <TableCell>
+              <Link href={`/block/${block.number}`}>{block.miner}</Link>
+            </TableCell>
+            <TableCell>
+              <Link href={`/block/${block.number}`}>
+                {block.transactions.length}
+              </Link>
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
