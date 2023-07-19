@@ -1,7 +1,6 @@
 "use client";
 
 import { FC, useEffect, useState } from "react";
-import Link from "next/link";
 import {
   Table,
   TableBody,
@@ -46,15 +45,13 @@ const BlocksTable: FC<BlocksTableProps> = ({ blocks }) => {
         {blockData.map((block) => (
           <TableRow key={block.hash}>
             <TableCell className="font-medium">
-              <Link href={`/block/${block.number}`}>{block.number}</Link>
+              <a href={`/block/${block.number}`}>{block.number}</a>
             </TableCell>
             <TableCell>
-              <Link href={`/block/${block.number}`}>{block.miner}</Link>
+              <a href={`/block/${block.number}`}>{block.miner}</a>
             </TableCell>
             <TableCell>
-              <Link href={`/block/${block.number}`}>
-                {block.transactions.length}
-              </Link>
+              <a href={`/block/${block.number}`}>{block.transactions.length}</a>
             </TableCell>
           </TableRow>
         ))}
